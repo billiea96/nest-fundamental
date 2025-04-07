@@ -1,5 +1,8 @@
 {
   "name": "n-fundamentals",
+  "engines": {
+    "node": "20"
+  },
   "version": "0.0.1",
   "description": "",
   "author": "",
