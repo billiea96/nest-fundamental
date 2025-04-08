@@ -20,6 +20,7 @@ export class UsersService {
       ...createUserDto,
       password: encryptedPassword,
       apiKey: randomUUID(),
+      phone: ''
     });
     delete newUser.password;
 
