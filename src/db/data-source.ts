@@ -4,6 +4,7 @@ import {
   TypeOrmModuleOptions,
 } from '@nestjs/typeorm';
 import { DataSource, DataSourceOptions } from 'typeorm';
+import 'dotenv/config'
 
 import { Artist } from 'src/artists/artist.entity';
 import { Playlist } from 'src/playlists/playlist.entity';
@@ -25,13 +26,15 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
       database: configService.get<string>('dbName'),
       entities: [User, Playlist, Song, Artist],
       synchronize: false,
-      migrations: ['dist/db/migrations/*.js'],
+      migrations: ['dist/src/db/migrations/*.js'],
     };
   },
 };
 
+
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
+  url: process.env.DB_URL,
   host: process.env.DB_HOST,
   port: parseInt(process.env.DB_PORT),
   username: process.env.USERNAME,
@@ -39,7 +42,7 @@ export const dataSourceOptions: DataSourceOptions = {
   database: process.env.DB_NAME,
   entities: ['dist/**/*.entity.js'],
   synchronize: false,
-  migrations: ['dist/db/migrations/*.js'],
+  migrations: ['dist/src/db/migrations/*.js'],
 };
 
 const dataSource = new DataSource(dataSourceOptions);
